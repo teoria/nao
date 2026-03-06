@@ -58,7 +58,12 @@ COPY apps/shared ./apps/shared
 FROM python:3.12-slim AS python-builder
 WORKDIR /app
 
-# Install uv for fast dependency management
+# Install uv and build dependencies for mysqlclient (required by ibis-framework[mysql])
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential \
+    default-libmysqlclient-dev \
+    pkg-config \
+    && rm -rf /var/lib/apt/lists/*
 RUN pip install uv
 
 # Copy cli package (contains nao_core)
@@ -82,6 +87,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     ca-certificates \
     curl \
     git \
+    libmariadb3 \
     libpq5 \
     supervisor \
     && curl -fsSL https://deb.nodesource.com/setup_24.x | bash - \

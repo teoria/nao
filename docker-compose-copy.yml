@@ -1,0 +1,17 @@
+services:
+    nao:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        ports:
+            - '${SERVER_PORT:-5005}:${SERVER_PORT:-5005}'
+        env_file:
+            - .env
+        volumes: 
+            - /Users/teoria/projects/OPEN_SOURCES/nao/example:/app/example
+         
+
+volumes:
+    nao_postgres_data:
+
+ 
