@@ -1,0 +1,7 @@
+.env
+filterbuy-agent/.env
+venv/
+.venv/
+.git/
+.gitignore
+credentials/
